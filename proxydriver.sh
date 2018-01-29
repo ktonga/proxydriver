@@ -224,14 +224,14 @@ gconftool-2 --type bool --set /system/http_proxy/use_http_proxy "$enabled"
 gsettings set org.gnome.system.proxy.http enabled "$enabled"
 gconftool-2 --type string --set /system/proxy/mode "$gnome_mode"
 gsettings set org.gnome.system.proxy mode "$gnome_mode"
-kwriteconfig --file kioslaverc --group 'Proxy Settings' --key ProxyType "${kde_mode}"
+kwriteconfig5 --file kioslaverc --group 'Proxy Settings' --key ProxyType "${kde_mode}"
 
 # proxy settings
 gconftool-2 --type string --set /system/http_proxy/host "$proxy"
 gsettings set org.gnome.system.proxy.http host '"$proxy"'
 gconftool-2 --type int --set /system/http_proxy/port "$port"
 gsettings set org.gnome.system.proxy.http port "$port"
-kwriteconfig --file kioslaverc --group 'Proxy Settings' --key httpProxy "http://${proxy} ${port}/"
+kwriteconfig5 --file kioslaverc --group 'Proxy Settings' --key httpProxy "http://${proxy} ${port}"
 
 gconftool-2 --type bool --set /system/http_proxy/use_same_proxy "$same"
 gsettings set org.gnome.system.proxy use-same-proxy "$same"
@@ -241,19 +241,19 @@ gconftool-2 --type string --set /system/proxy/secure_host "$https_proxy"
 gsettings set org.gnome.system.proxy.https host '"$https_proxy"'
 gconftool-2 --type int --set /system/proxy/secure_port "$https_port"
 gsettings set org.gnome.system.proxy.https port "$https_port"
-kwriteconfig --file kioslaverc --group 'Proxy Settings' --key httpsProxy "http://${https_proxy} ${https_port}/"
+kwriteconfig5 --file kioslaverc --group 'Proxy Settings' --key httpsProxy "http://${https_proxy} ${https_port}"
 
 gconftool-2 --type string --set /system/proxy/ftp_host "$ftp_proxy"
 gsettings set org.gnome.system.proxy.ftp host '"$ftp_proxy"'
 gconftool-2 --type int --set /system/proxy/ftp_port "$ftp_port"
 gsettings set org.gnome.system.proxy.ftp port "$ftp_port"
-kwriteconfig --file kioslaverc --group 'Proxy Settings' --key ftpProxy "ftp://${ftp_proxy} ${ftp_port}/"
+kwriteconfig5 --file kioslaverc --group 'Proxy Settings' --key ftpProxy "ftp://${ftp_proxy} ${ftp_port}"
 
 gconftool-2 --type string --set /system/proxy/socks_host "$socks_proxy"
 gsettings set org.gnome.system.proxy.socks host '"$socks_proxy"'
 gconftool-2 --type int --set /system/proxy/socks_port "$socks_port"
 gsettings set org.gnome.system.proxy.socks port "$socks_port"
-kwriteconfig --file kioslaverc --group 'Proxy Settings' --key socksProxy "http://${socks_proxy} ${socks_port}/"
+kwriteconfig5 --file kioslaverc --group 'Proxy Settings' --key socksProxy "http://${socks_proxy} ${socks_port}"
 
 # authentication
 gconftool-2 --type bool --set /system/http_proxy/use_authentication "$auth"
@@ -263,16 +263,16 @@ gsettings set org.gnome.system.proxy.http authentication-user "$login"
 gconftool-2 --type string --set /system/http_proxy/authentication_password "$pass"
 gsettings set org.gnome.system.proxy.http authentication-password "$pass"
 # KDE Prompts 'as needed'
-kwriteconfig --file kioslaverc --group 'Proxy Settings' --key Authmode 0
+kwriteconfig5 --file kioslaverc --group 'Proxy Settings' --key Authmode 0
 
 # ignore-list
 gconftool-2 --type list --list-type string --set /system/http_proxy/ignore_hosts "${gnome2_ignorelist}"
 gsettings set org.gnome.system.proxy ignore-hosts "${gnome3_ignorelist}"
-kwriteconfig --file kioslaverc --group 'Proxy Settings' --key NoProxyFor "${kde_ignorelist}"
+kwriteconfig5 --file kioslaverc --group 'Proxy Settings' --key NoProxyFor "${kde_ignorelist}"
 
 # gconftool-2 --type string --set /system/proxy/autoconfig_url "${autoconfig_url}"
 # gsettings set org.gnome.system.proxy autoconfig-url "${autoconfig_url}"
-kwriteconfig --file kioslaverc --group 'Proxy Settings' --key 'Proxy Config Script' "${autoconfig_url}"
+kwriteconfig5 --file kioslaverc --group 'Proxy Settings' --key 'Proxy Config Script' "${autoconfig_url}"
 
 # When you modify kioslaverc, you need to tell KIO.
 dbus-send --type=signal /KIO/Scheduler org.kde.KIO.Scheduler.reparseSlaveConfiguration string:''
